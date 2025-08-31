@@ -12,18 +12,23 @@ This project is part of my **capstone project at ALX Africa**.
 
 ---
 
-## 🚀 Features  
-- ✅ User authentication (login & signup)  
-- ✅ Manage products (CRUD)  
-- ✅ Manage categories (CRUD)  
-- ✅ Track inventory levels  
-- ✅ Record stock in/out transactions  
-- ✅ API endpoints built with Django REST Framework  
-- ✅ PostgreSQL database support  
-- ✅ Environment variables using `.env`  
-- ✅ Ready for deployment on Heroku  
+Features
 
----
+✅ User Authentication (JWT login/refresh)
+
+✅ CRUD for Inventory Items (Create, Read, Update, Delete)
+
+✅ Automatic Change Logging for quantity & price updates
+
+✅ Audit Trail: See full history of changes per item
+
+✅ Categories Management (add, update, delete categories)
+
+✅ Filtering, Searching, Ordering, Pagination
+
+✅ Low Stock Endpoint (/items/low_stock/)
+
+ Stretch Goals: low stock alerts, supplier management, reports, barcode scanning, multi-store suppo
 
 ## 🛠️ Tech Stack  
 | Technology        | Purpose                          |
@@ -33,11 +38,10 @@ This project is part of my **capstone project at ALX Africa**.
 | PostgreSQL        | Relational database              |
 | python-decouple / python-dotenv | Environment variables |
 | Gunicorn          | WSGI server for deployment       |
-| Whitenoise        | Static files in production       |
-| Heroku            | Cloud deployment                 |
+| Heroku            | Cloud deployment   
 
----
 
+           
 ## ⚙️ Setup & Installation  
 
 ### 📁 1. Clone the repository  
@@ -86,16 +90,24 @@ python manage.py runserver
 
 ---
 
-## 📡 API Endpoints (Sample)  
+API Endpoints
+🔹 Inventory Items
 
-| Method | Endpoint                     | Description               |
-|--------|------------------------------|---------------------------|
-| POST   | `/api/auth/register/`        | Register new user         |
-| POST   | `/api/auth/login/`           | Login user                |
-| GET    | `/api/products/`             | List all products         |
-| POST   | `/api/products/`             | Create a product          |
-| PUT    | `/api/products/{id}/`        | Update a product          |
-| DELETE | `/api/products/{id}/`        | Delete a product          |
+GET /api/inventory/items/ → List items
+
+POST /api/inventory/items/ → Create item
+
+GET /api/inventory/items/{id}/ → Retrieve item
+
+PUT /api/inventory/items/{id}/ → Update item
+
+DELETE /api/inventory/items/{id}/ → Delete item
+
+GET /api/inventory/items/{id}/history/ → View change history for one item
+
+GET /api/inventory/items/{id}/audit/ → View audit trail (price + stock changes)
+
+GET /api/inventory/items/low_stock/?threshold=5 → List items below stock threshold
 
 ---
 
@@ -110,9 +122,18 @@ inventory_management/
 ├── .gitignore
 ├── README.md
 └── manage.py
-```
 
----
+/api/inventory/items/?price__gte=100&price__lte=500
+
+/api/inventory/items/?quantity__lte=5
+
+/api/inventory/items/?category=2
+
+/api/inventory/items/?date_added__gte=2025-08-01
+
+/api/inventory/items/?ordering=-price
+
+/api/inventory/items/?search=laptop
 
 ## 🧑‍💻 Author  
 
@@ -127,4 +148,4 @@ This project is licensed under the MIT License.
 
 ---
 
-✨ _This project is actively being developed. Stay tuned for more updates and endpoints!_
+ _This project is actively being developed. Stay tuned for more updates and endpoints!_
