@@ -1,21 +1,21 @@
 from dotenv import load_dotenv
 import os
-load_dotenv()  # Load environment variables from a .env file 
 import dj_database_url
-
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Load environment variables from .env file (local dev)
+load_dotenv()
+
+
+# Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
+# Security
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*", "inventory-capstone-api.herokuapp.com"]
 
 
 # Application definition
@@ -65,7 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-   
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # Serve static files
 ]
 
 ROOT_URLCONF = 'inventory_management.urls'
@@ -93,7 +93,9 @@ WSGI_APPLICATION = 'inventory_management.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv("DATABASE_URL")
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=not DEBUG,
     )
 }
 
@@ -128,10 +130,11 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
+# Static files
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -139,11 +142,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-from datetime import timedelta
 
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),   # instead of 5 minutes
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
-}
 
 
