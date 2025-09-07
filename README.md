@@ -12,23 +12,18 @@ This project is part of my **capstone project at ALX Africa**.
 
 ---
 
-Features
+## 🚀 Features  
+- ✅ User authentication (login & signup)  
+- ✅ Manage products (CRUD)  
+- ✅ Manage categories (CRUD)  
+- ✅ Track inventory levels  
+- ✅ Record stock in/out transactions  
+- ✅ API endpoints built with Django REST Framework  
+- ✅ PostgreSQL database support  
+- ✅ Environment variables using `.env`  
+- ✅ Ready for deployment on Heroku  
 
-✅ User Authentication (JWT login/refresh)
-
-✅ CRUD for Inventory Items (Create, Read, Update, Delete)
-
-✅ Automatic Change Logging for quantity & price updates
-
-✅ Audit Trail: See full history of changes per item
-
-✅ Categories Management (add, update, delete categories)
-
-✅ Filtering, Searching, Ordering, Pagination
-
-✅ Low Stock Endpoint (/items/low_stock/)
-
- Stretch Goals: low stock alerts, supplier management, reports, barcode scanning, multi-store suppo
+---
 
 ## 🛠️ Tech Stack  
 | Technology        | Purpose                          |
@@ -38,76 +33,58 @@ Features
 | PostgreSQL        | Relational database              |
 | python-decouple / python-dotenv | Environment variables |
 | Gunicorn          | WSGI server for deployment       |
-| Heroku            | Cloud deployment   
+| Whitenoise        | Static files in production       |
+| Heroku            | Cloud deployment                 |
 
+---
 
-           
 ## ⚙️ Setup & Installation  
 
 ### 📁 1. Clone the repository  
 ```bash
 git clone https://github.com/<your-username>/inventory_management.git
 cd inventory_management
-```
 
-### 🧪 2. Create and activate a virtual environment  
-```bash
+
+Create and activate virtual environment
+
 python -m venv venv
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
-```
+source venv/bin/activate   # On Windows: venv\Scripts\activate
 
-### 📦 3. Install dependencies  
-```bash
+
+Install dependencies
+
 pip install -r requirements.txt
-```
 
-### 🔑 4. Create a `.env` file in the root directory  
-```ini
-# .env
-SECRET_KEY=your_django_secret_key
-DEBUG=True
-DATABASE_URL=postgres://postgres:yourpassword@localhost:5432/inventory_db
-```
 
-### 🛠 5. Run migrations  
-```bash
+Apply migrations
+
 python manage.py makemigrations
 python manage.py migrate
-```
 
-### 👩‍💻 6. Create a superuser  
-```bash
+
+Create a superuser
+
 python manage.py createsuperuser
-```
 
-### ▶️ 7. Run the development server  
-```bash
+
+Run the server
+
 python manage.py runserver
 ```
 
 ---
 
-API Endpoints
-🔹 Inventory Items
+## 📡 API Endpoints (Sample)  
 
-GET /api/inventory/items/ → List items
-
-POST /api/inventory/items/ → Create item
-
-GET /api/inventory/items/{id}/ → Retrieve item
-
-PUT /api/inventory/items/{id}/ → Update item
-
-DELETE /api/inventory/items/{id}/ → Delete item
-
-GET /api/inventory/items/{id}/history/ → View change history for one item
-
-GET /api/inventory/items/{id}/audit/ → View audit trail (price + stock changes)
-
-GET /api/inventory/items/low_stock/?threshold=5 → List items below stock threshold
+| Method | Endpoint                     | Description               |
+|--------|------------------------------|---------------------------|
+| POST   | `/api/auth/register/`        | Register new user         |
+| POST   | `/api/auth/login/`           | Login user                |
+| GET    | `/api/products/`             | List all products         |
+| POST   | `/api/products/`             | Create a product          |
+| PUT    | `/api/products/{id}/`        | Update a product          |
+| DELETE | `/api/products/{id}/`        | Delete a product          |
 
 ---
 
@@ -122,18 +99,9 @@ inventory_management/
 ├── .gitignore
 ├── README.md
 └── manage.py
+```
 
-/api/inventory/items/?price__gte=100&price__lte=500
-
-/api/inventory/items/?quantity__lte=5
-
-/api/inventory/items/?category=2
-
-/api/inventory/items/?date_added__gte=2025-08-01
-
-/api/inventory/items/?ordering=-price
-
-/api/inventory/items/?search=laptop
+---
 
 ## 🧑‍💻 Author  
 
@@ -148,4 +116,4 @@ This project is licensed under the MIT License.
 
 ---
 
- _This project is actively being developed. Stay tuned for more updates and endpoints!_
+✨ _This project is actively being developed. Stay tuned for more updates and endpoints!_
