@@ -12,9 +12,11 @@ class IsAdminOrReadOnly(permissions.BasePermission):
     Regular users can only read (GET, HEAD, OPTIONS).
     """
     def has_permission(self, request, view):
+        print(request.user)
         if request.method in permissions.SAFE_METHODS:  # GET, HEAD, OPTIONS
             return True
         return request.user and request.user.is_staff
+    
 
 
 class CategoryViewSet(viewsets.ModelViewSet):

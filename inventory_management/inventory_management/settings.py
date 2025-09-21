@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import os
 import dj_database_url
 from pathlib import Path
+from datetime import timedelta
 
 # Load environment variables from .env file (local dev)
 load_dotenv()
@@ -143,5 +144,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+    
+}
 
 
